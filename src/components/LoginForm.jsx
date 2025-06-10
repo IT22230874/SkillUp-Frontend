@@ -25,7 +25,7 @@ const LoginForm = ({ onSubmit, message }) => {
           type="text"
           name="username"
           id="username"
-          placeholder="Enter your Email"
+          placeholder="Enter your Username"
           value={form.username}
           onChange={handleChange}
           required
