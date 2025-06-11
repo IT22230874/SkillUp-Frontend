@@ -1,12 +1,70 @@
-# React + Vite
+# SkillUp – Frontend (React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+SkillUp is an online learning platform that empowers students to browse and enroll in courses and allows instructors to create and manage their own. This is the **frontend** of the platform, built using **React.js** and connected to a Node.js/Express backend. It also integrates OpenAI GPT to provide intelligent course recommendations.
 
-Currently, two official plugins are available:
+## 🌐 Live Preview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+👉 [Visit SkillUp](https://www.skilluplearning.site)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🧑‍💻 Features
+
+### Students
+
+- Register and login
+- View all available courses
+- View course details
+- Enroll in courses
+- View enrolled courses
+- ChatGPT-based course recommendation
+
+### Instructors
+
+- Register and login
+- Create, edit, and delete courses
+- View list of instructor’s own courses
+- See enrolled students per course
+
+---
+
+## 🛠 Tech Stack
+
+- **React.js** – Frontend framework
+- **Axios** – API communication
+- **React Router** – Client-side routing
+- **JWT** – Token-based authentication
+- **Tailwind CSS** – Styling
+- **OpenAI API** – ChatGPT integration
+- **Cloudinary** – Image upload and management
+- **Deployed via NGINX on AWS EC2**
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js & npm
+- Backend API running
+- Vite
+
+### Clone & Setup
+
+```
+git clone https://github.com/IT22230874/SkillUp-Frontend.git
+
+npm install
+
+Environment Variables
+Create a .env file in the root:
+
+env
+
+VITE_API_URL=backend_base_url
+
+Run the App (Dev Mode)
+
+npm run dev
+
+```

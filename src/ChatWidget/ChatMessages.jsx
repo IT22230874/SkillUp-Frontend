@@ -8,12 +8,17 @@ export default function ChatMessages({ messages }) {
   }, [messages]);
 
   return (
-    <div ref={ref} className="flex-1 overflow-y-auto p-3 space-y-2 text-sm">
+    <div
+      ref={ref}
+      className="flex-1 overflow-y-auto p-4 space-y-3 text-sm bg-gray-50"
+    >
       {messages.map((msg, i) => (
         <div
           key={i}
-          className={`p-2 rounded-lg max-w-xs ${
-            msg.role === "user" ? "bg-blue-100 self-end ml-auto" : "bg-gray-100"
+          className={`p-3 rounded-xl max-w-[80%] shadow-sm ${
+            msg.role === "user"
+              ? "bg-[#e0f7fc] self-end ml-auto text-right"
+              : "bg-white text-gray-800"
           }`}
         >
           {msg.content}

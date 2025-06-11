@@ -1,69 +1,4 @@
-// import React from "react";
-
-// function CourseForm({
-//   onSubmit,
-//   form,
-//   setForm,
-//   editingCourse,
-//   courseImage,
-//   courseImageUploading,
-//   handleCourseImageChange,
-// }) {
-//   return (
-//     <div className="bg-white p-6 rounded-xl shadow mb-6">
-//       <h2 className="text-xl font-semibold mb-4">
-//         {editingCourse ? "Edit Course" : "Add New Course"}
-//       </h2>
-//       <form onSubmit={onSubmit} className="space-y-4">
-//         <input
-//           type="text"
-//           name="title"
-//           placeholder="Course Title"
-//           value={form.title}
-//           onChange={(e) => setForm({ ...form, title: e.target.value })}
-//           required
-//           className="w-full border px-4 py-2 rounded"
-//         />
-//         <textarea
-//           name="description"
-//           placeholder="Course Description"
-//           value={form.description}
-//           onChange={(e) => setForm({ ...form, description: e.target.value })}
-//           className="w-full border px-4 py-2 rounded"
-//         />
-//         <div>
-//           <label className="block font-semibold mb-1">Course Image</label>
-//           <input
-//             type="file"
-//             accept="image/*"
-//             onChange={handleCourseImageChange}
-//           />
-//           {courseImageUploading && (
-//             <p className="text-blue-600 text-sm mt-1">Uploading...</p>
-//           )}
-//           {courseImage && (
-//             <img
-//               src={courseImage}
-//               alt="Course"
-//               className="h-16 w-16 mt-2 rounded object-cover"
-//             />
-//           )}
-//         </div>
-//         <button
-//           type="submit"
-//           className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-//         >
-//           {editingCourse ? "Update Course" : "Add Course"}
-//         </button>
-//       </form>
-//     </div>
-//   );
-// }
-
-// export default CourseForm;
-
-import React from "react";
-import toast from "react-hot-toast";
+import React, { useState } from "react";
 
 function CourseForm({
   onSubmit,
@@ -74,9 +9,30 @@ function CourseForm({
   courseImageUploading,
   handleCourseImageChange,
 }) {
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const newErrors = {};
+
+    if (!form.title.trim()) {
+      newErrors.title = "Course title is required";
+    } else if (form.title.length < 3) {
+      newErrors.title = "Title must be at least 3 characters";
+    }
+
+    if (!courseImage && !editingCourse) {
+      newErrors.image = "Course image is required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(e); // Parent handles toast
+    if (validate()) {
+      onSubmit(e);
+    }
   };
 
   return (
@@ -93,11 +49,17 @@ function CourseForm({
             type="text"
             name="title"
             value={form.title}
-            onChange={(e) => setForm({ ...form, title: e.target.value })}
+            onChange={(e) => {
+              setForm({ ...form, title: e.target.value });
+              setErrors({ ...errors, title: "" });
+            }}
             placeholder="Enter course title"
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none"
           />
+          {errors.title && (
+            <p className="mt-1 text-sm text-red-600">{errors.title}</p>
+          )}
         </div>
 
         <div>
@@ -107,11 +69,17 @@ function CourseForm({
           <textarea
             name="description"
             value={form.description}
-            onChange={(e) => setForm({ ...form, description: e.target.value })}
+            onChange={(e) => {
+              setForm({ ...form, description: e.target.value });
+              setErrors({ ...errors, description: "" });
+            }}
             placeholder="Enter course description"
             rows={4}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none"
           />
+          {errors.description && (
+            <p className="mt-1 text-sm text-red-600">{errors.description}</p>
+          )}
         </div>
 
         <div>
@@ -121,8 +89,14 @@ function CourseForm({
           <input
             type="file"
             accept="image/*"
-            onChange={handleCourseImageChange}
+            onChange={(e) => {
+              handleCourseImageChange(e);
+              setErrors({ ...errors, image: "" });
+            }}
           />
+          {errors.image && (
+            <p className="mt-1 text-sm text-red-600">{errors.image}</p>
+          )}
           {courseImageUploading && (
             <p className="text-sm text-blue-600 mt-1">Uploading...</p>
           )}
