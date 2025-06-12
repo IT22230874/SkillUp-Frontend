@@ -55,7 +55,7 @@ function LoginScreen() {
     <div className="flex min-h-screen">
       <div className="hidden md:flex md:w-1/2 h-screen">
         <img
-          src="https://img.freepik.com/free-photo/young-man-studying-library-using-laptop_23-2149285400.jpg?t=st=1749443790~exp=1749447390~hmac=96f8341d8c2d8df0a13255e7a3a00d9118950c0b690d25e4037e55fc564053b4&w=1380"
+          src="https://img.freepik.com/free-photo/young-woman-attending-online-class_23-2148854934.jpg?t=st=1749633146~exp=1749636746~hmac=f5560b9f12587807487a6f86579221bad4d3cf8dfe49a90319d2356102257e57&w=1380"
           alt="Student studying"
           className="w-full h-full object-cover"
         />

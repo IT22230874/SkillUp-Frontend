@@ -32,7 +32,7 @@ export default function ChatWindow({ onClose }) {
   };
 
   return (
-    <div className="w-80 h-96 bg-white rounded-xl shadow-2xl flex flex-col overflow-hidden">
+    <div className="w-80 h-96 bg-white rounded-xl shadow-xl flex flex-col overflow-hidden border border-gray-200">
       <ChatHeader onClose={onClose} />
       <ChatMessages messages={messages} />
       <ChatInput onSend={handleSend} />

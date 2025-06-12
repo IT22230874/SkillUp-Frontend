@@ -10,6 +10,8 @@ const RegisterForm = ({ onSubmit, role = "student", message }) => {
     bio: "",
   });
 
+  const [errors, setErrors] = useState({});
+
   useEffect(() => {
     setForm({
       username: "",
@@ -19,27 +21,69 @@ const RegisterForm = ({ onSubmit, role = "student", message }) => {
       lastName: "",
       bio: "",
     });
+    setErrors({});
   }, [role]);
+
+  const validate = () => {
+    const newErrors = {};
+
+    if (!form.username.trim()) {
+      newErrors.username = "Username is required";
+    } else if (form.username.length < 3) {
+      newErrors.username = "Username must be at least 3 characters";
+    } else if (!/^[a-zA-Z0-9_]+$/.test(form.username)) {
+      newErrors.username =
+        "Username can only contain letters, numbers, and underscores";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      newErrors.email = "Email is not valid";
+    }
+
+    if (!form.password) {
+      newErrors.password = "Password is required";
+    } else if (form.password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters";
+    } else if (
+      !/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])/.test(form.password)
+    ) {
+      newErrors.password =
+        "Password must include uppercase, lowercase, number, and special character";
+    }
+
+    if (form.firstName && !/^[a-zA-Z]{2,}$/.test(form.firstName)) {
+      newErrors.firstName = "First name must be at least 2 letters";
+    }
+
+    if (form.lastName && !/^[a-zA-Z]{2,}$/.test(form.lastName)) {
+      newErrors.lastName = "Last name must be at least 2 letters";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ ...form, role });
+    if (validate()) {
+      onSubmit({ ...form, role });
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {/* Heading */}
       <h2 className="text-2xl font-bold mb-2 text-center text-[#253a59]">
         {role === "student"
           ? "Student Registration"
           : "Instructor Registration"}
       </h2>
-
-      {/* Username */}
       <div>
         <label
           htmlFor="username"
@@ -55,9 +99,10 @@ const RegisterForm = ({ onSubmit, role = "student", message }) => {
           required
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#23b8d0] focus:outline-none"
         />
+        {errors.username && (
+          <p className="text-sm text-red-600 mt-1">{errors.username}</p>
+        )}
       </div>
-
-      {/* Email */}
       <div>
         <label
           htmlFor="email"
@@ -74,9 +119,10 @@ const RegisterForm = ({ onSubmit, role = "student", message }) => {
           required
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#23b8d0] focus:outline-none"
         />
+        {errors.email && (
+          <p className="text-sm text-red-600 mt-1">{errors.email}</p>
+        )}
       </div>
-
-      {/* Password */}
       <div>
         <label
           htmlFor="password"
@@ -93,9 +139,10 @@ const RegisterForm = ({ onSubmit, role = "student", message }) => {
           required
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#23b8d0] focus:outline-none"
         />
+        {errors.password && (
+          <p className="text-sm text-red-600 mt-1">{errors.password}</p>
+        )}
       </div>
-
-      {/* First Name */}
       <div>
         <label
           htmlFor="firstName"
@@ -110,9 +157,10 @@ const RegisterForm = ({ onSubmit, role = "student", message }) => {
           onChange={handleChange}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#23b8d0] focus:outline-none"
         />
+        {errors.firstName && (
+          <p className="text-sm text-red-600 mt-1">{errors.firstName}</p>
+        )}
       </div>
-
-      {/* Last Name */}
       <div>
         <label
           htmlFor="lastName"
@@ -127,9 +175,10 @@ const RegisterForm = ({ onSubmit, role = "student", message }) => {
           onChange={handleChange}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#23b8d0] focus:outline-none"
         />
+        {errors.lastName && (
+          <p className="text-sm text-red-600 mt-1">{errors.lastName}</p>
+        )}
       </div>
-
-      {/* Bio */}
       <div>
         <label
           htmlFor="bio"
@@ -146,16 +195,12 @@ const RegisterForm = ({ onSubmit, role = "student", message }) => {
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#23b8d0] focus:outline-none"
         />
       </div>
-
-      {/* Submit */}
       <button
         type="submit"
         className="w-full bg-[#23b8d0] hover:bg-[#1ba6be] text-white font-semibold py-2 rounded-lg transition"
       >
         Register
       </button>
-
-      {/* Message */}
       {message && (
         <div className="text-center text-sm text-red-600 mt-2">{message}</div>
       )}

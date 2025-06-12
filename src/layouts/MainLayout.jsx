@@ -9,8 +9,19 @@ const MainLayout = () => {
   const location = useLocation();
   const { user, logout } = useAuth();
 
-  const hideChatWidget = ["/register", "/login", "/oauth-success"];
-  const shouldHideChatWidget = hideChatWidget.includes(location.pathname);
+  const staticPaths = [
+    "/register",
+    "/login",
+    "/oauth-success",
+    "/complete-signup",
+    "/instructor/dashboard",
+  ];
+
+  const dynamicPathPatterns = [/^\/courses\/[^/]+$/];
+
+  const shouldHideChatWidget =
+    staticPaths.includes(location.pathname) ||
+    dynamicPathPatterns.some((pattern) => pattern.test(location.pathname));
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">

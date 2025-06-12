@@ -14,11 +14,11 @@ export default function ChatWidget() {
       )}
 
       <button
-        className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-xl transition duration-300 flex items-center justify-center"
+        className="bg-[#23b8d0] hover:bg-[#1ba6be] text-white p-3 rounded-full shadow-xl transition duration-300 flex items-center justify-center"
         onClick={() => setIsOpen((prev) => !prev)}
         aria-label="Toggle Chat"
       >
-        {isOpen ? <X size={20} /> : <MessageCircle size={20} />}
+        {isOpen ? <X size={20} /> : <MessageCircle size={30} />}
       </button>
     </div>
   );

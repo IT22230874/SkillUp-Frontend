@@ -198,7 +198,6 @@ function CourseEditor({ course, onClose, onCourseUpdated }) {
             className="space-y-6 overflow-y-auto pr-2"
             style={{ maxHeight: "calc(90vh - 4rem)" }}
           >
-            {/* Title */}
             <div>
               <label className="block text-sm font-medium mb-1 text-gray-700">
                 Course Title
@@ -211,7 +210,6 @@ function CourseEditor({ course, onClose, onCourseUpdated }) {
               />
             </div>
 
-            {/* Description */}
             <div>
               <label className="block text-sm font-medium mb-1 text-gray-700">
                 Description
@@ -224,7 +222,6 @@ function CourseEditor({ course, onClose, onCourseUpdated }) {
               />
             </div>
 
-            {/* Image */}
             <div>
               <label className="block text-sm font-medium mb-1 text-gray-700">
                 Course Image
@@ -249,7 +246,6 @@ function CourseEditor({ course, onClose, onCourseUpdated }) {
               )}
             </div>
 
-            {/* Sections & Topics */}
             <div>
               <div className="flex justify-between items-center mb-2">
                 <h3 className="text-lg font-semibold text-[#253a59]">
@@ -295,7 +291,6 @@ function CourseEditor({ course, onClose, onCourseUpdated }) {
               </div>
             </div>
 
-            {/* Actions */}
             <div className="flex justify-end gap-3 pt-4 border-t mt-6 sticky bottom-0 bg-white z-10">
               <button
                 type="button"

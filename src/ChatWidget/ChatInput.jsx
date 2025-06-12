@@ -14,10 +14,10 @@ export default function ChatInput({ onSend }) {
   };
 
   return (
-    <div className="p-2 border-t flex items-center gap-2">
+    <div className="p-3 border-t flex items-center gap-2">
       <input
         type="text"
-        className="flex-1 border rounded px-2 py-1 text-sm"
+        className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#23b8d0]"
         placeholder="Type a message..."
         value={input}
         onChange={(e) => setInput(e.target.value)}
@@ -25,7 +25,7 @@ export default function ChatInput({ onSend }) {
       />
       <button
         onClick={handleSend}
-        className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm"
+        className="bg-[#23b8d0] hover:bg-[#1ba6be] text-white px-4 py-2 rounded-lg text-sm font-medium transition"
       >
         Send
       </button>
